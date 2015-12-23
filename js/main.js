@@ -1,10 +1,7 @@
 //SCRIPT TO REMOVE INLINE STYLING AND PLACE WITHIN CSS
 
 var targetDiv = document.querySelectorAll('.demoBox');
-var targetAttr = targetDiv[0].getAttribute('style');
-var color = targetAttr.split(":")[1];
-
-targetDiv[0].classList.add('jorge');
+var colors = [];
 
 var sheet = (function () {
     "use strict";
@@ -20,5 +17,35 @@ var sheet = (function () {
     return style.sheet;
 }());
 
-sheet.insertRule(".jorge { background-color: blue; }", 0);
-targetDiv[0].style.backgroundColor = '';
+function getDivColors(divs) {
+    "use strict";
+    var colors = [];
+    var color;
+    
+    for (var i = 0, max = divs.length; i < max; i++) {
+        color = divs[i].getAttribute('style');
+        colors.push(color.split(":")[1]);
+    }
+    
+    return colors;
+}
+
+function applyNewClass(divs) {
+    for (var i = 0, max = divs.length; i < max; i++) {
+        divs[i].classList.add("jorge" + i);
+    }
+}
+
+function setColorStyles(divs, colors, sheet) {
+    if (divs.length === colors.length) {
+        for (var i = 0, max = colors.length; i < max; i++) {
+            sheet.insertRule(".jorge" + i + " { background-color: " + colors[i] + "; }", i);
+            divs[i].style.backgroundColor = '';
+        }
+    }
+}
+
+colors = getDivColors(targetDiv);
+applyNewClass(targetDiv);
+
+console.log("Run setColorStyles(divs, colors, sheet) to apply the color style switch!");
