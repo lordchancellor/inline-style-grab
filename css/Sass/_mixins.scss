@@ -1,0 +1,6 @@
+//MIXINS
+
+@mixin marginX($var) {
+    margin-left: $var;
+    margin-right: $var;
+}

@@ -1,5 +1,12 @@
 /***************************************
 ** Primary Stylesheet for Sandbox 3.0 **
 ***************************************/
+.demoBox {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #333;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px; }
 
 /*# sourceMappingURL=style.css.map */
