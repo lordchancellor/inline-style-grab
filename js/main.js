@@ -39,9 +39,14 @@ function applyNewClass(divs) {
 function setColorStyles(divs, colors, sheet) {
     if (divs.length === colors.length) {
         for (var i = 0, max = colors.length; i < max; i++) {
-            sheet.insertRule('.jorge' + i + ' { background-color: ' + colors[i] + '; }', i);
-            //divs[i].style.backgroundColor = '';
-            
+            //Cross-browser compliant code to insert our new rule into the new stylesheet
+            if (sheet.insertRule) {
+                sheet.insertRule('.jorge' + i + ' { background-color: ' + colors[i] + '; }', i);
+            } else {
+                sheet.addRule('.jorge' + i, 'background-color: ' + colors[i] + ';', i);
+            }
+
+            //Cross-browser compliant code to remove the existing inline style
             if (divs[i].style.removeProperty) {
                 divs[i].style.removeProperty('background-color');
             } else {
